@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();  //the value we type are converted into lowercase and storing in a variable
+
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            //progress bar
+            $("#btn").click(function () {
+                $("#box").animate({
+                    width: "400px"
+                },
+                    {
+                        duration: 5000,
+                        easing: "linear",
+                        step: function (x) {
+                            $("#demo").text(Math.round(x * 100 / 400) + "%");
+                        }
+                    });
+            });
+        });
+
+    </script>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Filterable Table</h2>
+    <p>Type something in the input field to search the table for first names, last names or emails:</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <br><br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            <tr>
+                <td>Rahul</td>
+                <td>Chidu</td>
+                <td>rc@example.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Comb</td>
+                <td>marycomb@mail.com</td>
+            </tr>
+            <tr>
+                <td>Jeff</td>
+                <td>Bezos</td>
+                <td>jbezo@greatstuff.com</td>
+            </tr>
+            <tr>
+                <td>Anja</td>
+                <td>Ravendale</td>
+                <td>a_r@test.com</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Note that we start the search in tbody, to prevent filtering the table headers.</p> <br>
+
+    <h2>Animated using JQuery</h2>
+    <button id="btn">Start Progress Bar</button>
+
+    <div style="border:1px solid green;margin:10px;width:400px;">
+        <div id="box" style="background:#50d51c;height:50px;width:1px;border:1px solid green;"></div>
+    </div>
+
+    <p id="demo"></p>
+
+
+</body>
+
+</html>
